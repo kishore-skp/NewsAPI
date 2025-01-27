@@ -2,27 +2,27 @@ const {ExecuteDB} = require("../DAL/sqlDAL")
 
 const InsertArticle = async (req, res) => {
     try {
-
+      const currentDate = new Date();
       const sqlQuery = `
             INSERT INTO Articles (
                 ARTICLE_TITLE,
-                ARTICLE_ENG_TITLE,
                 ARTICLE_SUMMARY,
                 ARTICLE_IMAGE_URL,
                 ARTICLE_CONTENT,
                 ARTICLE_CATEGORY,
                 ARTICLE_CREDITS,
-                ARTICLE_KEYWORDS
+                ARTICLE_KEYWORDS,
+                PUBLISHED_DATE_TIME
             )
             VALUES (
                 '${req.body.ARTICLE_TITLE}', 
-                '${req.body.ARTICLE_ENG_TITLE}', 
                 '${req.body.ARTICLE_SUMMARY}', 
                 '${req.body.ARTICLE_IMAGE_URL}', 
                 '${req.body.ARTICLE_CONTENT}', 
                 '${req.body.ARTICLE_CATEGORY}', 
                 '${req.body.ARTICLE_CREDITS}', 
-                '${req.body.ARTICLE_KEYWORDS}'
+                '${req.body.ARTICLE_KEYWORDS}',
+                '${currentDate.toISOString().slice(0, 19).replace('T', ' ')}'
             );
         `;
 
